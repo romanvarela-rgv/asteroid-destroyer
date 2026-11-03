@@ -4,14 +4,14 @@
 # Uso (desde la raiz del repo):   powershell -ExecutionPolicy Bypass -File tools\generate-ui-assets.ps1
 #
 # Para agregar un boton nuevo, sumalo a $buttonGroups de abajo y volve a correrlo.
-# El dibujo de botones, titulos y fondo esta en tools\UiGen.cs.
+# El dibujo de botones, titulos y fondo esta en tools\ESTUiGen.cs.
 
 $ErrorActionPreference = 'Stop'
 
 $root     = Split-Path -Parent $PSScriptRoot
 
-# El generador (UiGen.cs) usa la misma fuente bitmap que el juego (src/PixelFont.cs)
-Add-Type -Path (Join-Path $PSScriptRoot "UiGen.cs"), (Join-Path $root "src\PixelFont.cs") -ReferencedAssemblies System.Drawing
+# El generador (ESTUiGen.cs) usa la misma fuente bitmap que el juego (src/ESTPixelFont.cs)
+Add-Type -Path (Join-Path $PSScriptRoot "ESTUiGen.cs"), (Join-Path $root "src\PixelFont.cs") -ReferencedAssemblies System.Drawing
 
 $textures = Join-Path $root 'assets\EngineGDI\textures'
 New-Item -ItemType Directory -Force (Join-Path $textures 'UI') | Out-Null
@@ -33,9 +33,9 @@ $buttonGroups = @(
 )
 
 foreach ($buttons in $buttonGroups) {
-    $scale = ($buttons.Values | ForEach-Object { [UiGen]::FitScale($_) } | Measure-Object -Minimum).Minimum
+    $scale = ($buttons.Values | ForEach-Object { [ESTUiGen]::FitScale($_) } | Measure-Object -Minimum).Minimum
     foreach ($file in $buttons.Keys) {
-        [UiGen]::Button($buttons[$file], $scale, (Join-Path $textures "Buttons\$file"))
+        [ESTUiGen]::Button($buttons[$file], $scale, (Join-Path $textures "Buttons\$file"))
         Write-Host "Buttons\$file"
     }
 }
@@ -49,17 +49,17 @@ $titles = [ordered]@{
     'NewRecordTitle.png' = 'NEW RECORD!'
 }
 foreach ($file in $titles.Keys) {
-    [UiGen]::Title($titles[$file], 10, (Join-Path $textures "UI\$file"))
+    [ESTUiGen]::Title($titles[$file], 10, (Join-Path $textures "UI\$file"))
     Write-Host "UI\$file"
 }
 
-[UiGen]::Selector(5, (Join-Path $textures 'UI\Selector.png'));                            Write-Host 'UI\Selector.png'
+[ESTUiGen]::Selector(5, (Join-Path $textures 'UI\Selector.png'));                            Write-Host 'UI\Selector.png'
 
 # Frames de la explosion (los de 16px de Animations) agrandados x8 sin suavizar
 New-Item -ItemType Directory -Force (Join-Path $textures 'Explosion') | Out-Null
 foreach ($i in 1..8) {
-    [UiGen]::Upscale((Join-Path $textures "Animations\$i.png"), 8, (Join-Path $textures "Explosion\$i.png"))
+    [ESTUiGen]::Upscale((Join-Path $textures "Animations\$i.png"), 8, (Join-Path $textures "Explosion\$i.png"))
     Write-Host "Explosion\$i.png"
 }
 
-[UiGen]::Background(1024, 544, 4, 7, (Join-Path $textures 'Scenes\GameBackground.png'));  Write-Host 'Scenes\GameBackground.png'
+[ESTUiGen]::Background(1024, 544, 4, 7, (Join-Path $textures 'Scenes\GameBackground.png'));  Write-Host 'Scenes\GameBackground.png'

@@ -11,16 +11,31 @@ Arcade de naves y asteroides en C# con WinForms y GDI+, sobre un motor 2D propio
 
 | Concepto | Dónde |
 |---|---|
-| Herencia y polimorfismo | `Character` → `Player`, `Asteroid`, `Bullet`, `Explosion` |
-| Interfaces | `IScene`, `IButton`, `ISaveStore` |
-| Inyección de dependencias | Cada escena recibe sus acciones (jugar, reintentar, volver) por constructor y no toca `Program` directo; `GameManager` recibe un `ISaveStore` sin saber que es un archivo |
-| Singleton | `GameManager` |
-| Factory | `AsteroidFactory` (asteroides nuevos y los fragmentos al partirse) |
-| Object Pool genérico | `PoolObject<T>` para las balas |
-| Eventos y delegates | `Asteroid.OnDestroyed` (explosión y fragmentos), `ImageButton.OnPressed`, `Func<bool>` en `OptionsScene` |
-| Enums | `GameState`, `AsteroidSize` |
-| Máquina de estados | `GameState`: menú, opciones, jugando, pausa, victoria, game over |
-| Archivos y excepciones | `FileSaveStore`: guarda récord, sonido y progreso en `%AppData%\AsteroidDestroyer\save.txt`, con `try/catch` para que un archivo roto no cierre el juego |
+| Herencia y polimorfismo | `ABSCharacter` → `HERPlayer`, `HERAsteroid`, `HERBullet`, `HERExplosion` |
+| Interfaces | `INTScene`, `INTButton`, `INTSaveStore` |
+| Inyección de dependencias | Cada escena recibe sus acciones (jugar, reintentar, volver) por constructor y no toca `ESTProgram` directo; `CLSGameManager` recibe un `INTSaveStore` sin saber que es un archivo |
+| Singleton | `CLSGameManager` |
+| Factory | `CLSAsteroidFactory` (asteroides nuevos y los fragmentos al partirse) |
+| Object Pool genérico | `CLSPoolObject<T>` para las balas |
+| Eventos y delegates | `HERAsteroid.OnDestroyed` (explosión y fragmentos), `IMPImageButton.OnPressed`, `Func<bool>` en `IMPOptionsScene` |
+| Enums | `ENUGameState`, `ENUAsteroidSize` |
+| Máquina de estados | `ENUGameState`: menú, opciones, jugando, pausa, victoria, game over |
+| Archivos y excepciones | `IMPFileSaveStore`: guarda récord, sonido y progreso en `%AppData%\AsteroidDestroyer\save.txt`, con `try/catch` para que un archivo roto no cierre el juego |
+
+### Prefijos de clases
+
+Cada tipo lleva un prefijo de tres letras que indica qué concepto de POO representa:
+
+| Prefijo | Significado | Ejemplos |
+|---|---|---|
+| `ABS` | Clase abstracta | `ABSCharacter` |
+| `HER` | Hereda de una clase base | `HERPlayer`, `HERAsteroid`, `HERBullet`, `HERExplosion` |
+| `INT` | Interfaz | `INTScene`, `INTButton`, `INTSaveStore` |
+| `IMP` | Implementa una interfaz | `IMPMainMenuScene`, `IMPFileSaveStore`, `IMPImageButton` |
+| `EST` | Clase estática | `ESTEngine`, `ESTCamera`, `ESTCollision`, `ESTPixelFont` |
+| `ENU` | Enum | `ENUGameState`, `ENUAsteroidSize` |
+| `STR` | Struct (tipo por valor) | `STRVector2f`, `STRTransform` |
+| `CLS` | Clase concreta común | `CLSGameManager`, `CLSAsteroidFactory`, `CLSPoolObject<T>` |
 
 ## Cómo se juega
 
@@ -68,7 +83,7 @@ powershell -ExecutionPolicy Bypass -File tools\generate-ui-assets.ps1
 
 Para sumar un botón, agregalo a `$buttonGroups` en el script y volvé a correrlo.
 
-Todo el texto del juego (botones, títulos, HUD y menús) usa una sola fuente pixel definida en `src/PixelFont.cs`: el generador la usa para los PNG y `PixelText` para dibujar el texto en pantalla, así todo tiene las mismas letras.
+Todo el texto del juego (botones, títulos, HUD y menús) usa una sola fuente pixel definida en `src/ESTPixelFont.cs`: el generador la usa para los PNG y `ESTPixelText` para dibujar el texto en pantalla, así todo tiene las mismas letras.
 
 ## Licencia
 
