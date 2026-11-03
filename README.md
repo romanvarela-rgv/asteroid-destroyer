@@ -1,7 +1,7 @@
 # Asteroid Destroyer
 
-[![Build](https://github.com/romanvarela-rgv/asteroid-destroyer-csharp/actions/workflows/build.yml/badge.svg)](https://github.com/romanvarela-rgv/asteroid-destroyer-csharp/actions/workflows/build.yml)
-[![Descargar](https://img.shields.io/github/v/release/romanvarela-rgv/asteroid-destroyer-csharp?label=descargar&logo=windows)](https://github.com/romanvarela-rgv/asteroid-destroyer-csharp/releases/latest)
+[![Build](https://github.com/romanvarela-rgv/asteroid-destroyer/actions/workflows/build.yml/badge.svg)](https://github.com/romanvarela-rgv/asteroid-destroyer/actions/workflows/build.yml)
+[![Descargar](https://img.shields.io/github/v/release/romanvarela-rgv/asteroid-destroyer?label=descargar&logo=windows)](https://github.com/romanvarela-rgv/asteroid-destroyer/releases/latest)
 
 Arcade de naves y asteroides en C# con WinForms y GDI+, sobre un motor 2D propio (`EngineGDI`). Lo hice para Paradigmas de Programación en UADE, y la idea era aplicar programación orientada a objetos en un juego de verdad, no en ejercicios sueltos.
 
@@ -61,7 +61,7 @@ Los asteroides chicos valen 100 puntos, los medianos 50 y los grandes 20. El ré
 
 ## Cómo jugarlo
 
-1. Bajá `AsteroidDestroyer-win.zip` de la [última release](https://github.com/romanvarela-rgv/asteroid-destroyer-csharp/releases/latest).
+1. Bajá `AsteroidDestroyer-win.zip` de la [última release](https://github.com/romanvarela-rgv/asteroid-destroyer/releases/latest).
 2. Descomprimilo y abrí `EngineGDI.exe`. Necesita Windows con .NET Framework 4.8, que ya viene instalado en Windows 10 y 11.
 
 Windows puede mostrar un aviso de SmartScreen porque el `.exe` no está firmado: tocá "Más información" y después "Ejecutar de todas formas".
